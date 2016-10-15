@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Pur Return"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/bnoInput" />
+
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:ems="10"
+        android:id="@+id/purRetNo"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginLeft="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name"
+        android:id="@+id/textView3"
+        android:layout_alignTop="@+id/nameInputpr"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/nameInputpr"
+        android:layout_above="@+id/addpr"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/savepr"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/nameInputpr"
+        android:layout_alignStart="@+id/nameInputpr"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/cancelpr"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/savepr"
+        android:layout_toEndOf="@+id/savepr"
+        android:layout_marginLeft="55dp"
+        android:layout_marginStart="55dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        android:id="@+id/scanpr"
+        android:layout_above="@+id/purRetListView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/purRetComment"
+        android:layout_above="@+id/savepr"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/addpr"
+        android:layout_alignTop="@+id/scanpr"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Against"
+        android:id="@+id/textView27"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/cancelpr"
+        android:layout_alignEnd="@+id/cancelpr" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/againstBno"
+        android:layout_alignBottom="@+id/purRetNo"
+        android:layout_toRightOf="@+id/textView27"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:text=" " />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/purRetListView"
+        android:descendantFocusability="blocksDescendants"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/purRetComment"
+        android:layout_toRightOf="@+id/dateedit"
+        android:layout_toEndOf="@+id/dateedit"
+        android:id="@+id/grandTotal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Date"
+        android:ems="10"
+        android:id="@+id/dateedit"
+        android:layout_below="@+id/purRetNo"
+        android:layout_alignRight="@+id/purRetNo"
+        android:layout_alignEnd="@+id/purRetNo" />
+
+</RelativeLayout>

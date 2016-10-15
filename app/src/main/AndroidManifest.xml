@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.rushabh.clothesrack">
+
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".addpurchase"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+            </activity>
+
+        <activity
+            android:name=".addproduct"
+            android:theme="@style/Theme.AppCompat.Dialog">
+            </activity>
+        <activity
+            android:name=".addcontact"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+        <activity
+            android:name=".addbrand"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+        <activity
+            android:name=".addStock"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+        <activity
+            android:name=".addsale"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+        <activity
+            android:name=".PurchaseBillFilters"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+        <activity
+            android:name=".addpurchasereturn"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+        <activity
+            android:name=".addsalereturn"
+            android:theme="@style/Theme.AppCompat.Dialog">
+
+        </activity>
+        <activity
+            android:name=".EditPurchase"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity
+            android:name=".EditSale"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity
+            android:name=".EditPayment"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity
+            android:name=".EditPurchaseReturn"
+            android:theme="@style/AppTheme">
+
+        </activity>
+        <activity android:name=".EditSaleReturn" />
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+    </application>
+
+</manifest>

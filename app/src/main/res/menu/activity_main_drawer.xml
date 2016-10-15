@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_purchase"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Purchase" />
+        <item
+            android:id="@+id/nav_sale"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Sale" />
+        <item
+            android:id="@+id/nav_stock"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Stock" />
+        <item
+            android:id="@+id/nav_payment"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Payment" />
+        <item
+            android:id="@+id/nav_purchase_retun"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Purchase Return" />
+        <item
+            android:id="@+id/nav_sale_retun"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Sale Return" />
+        <item
+            android:id="@+id/nav_purchase_bill"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Ledger" />
+        <item
+            android:id="@+id/nav_sale_bill"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Ledger Sale" />
+        <item
+            android:id="@+id/nav_test"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Test" />
+       <item
+            android:id="@+id/printBarCodes"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Print BarCode" />
+        <item
+            android:id="@+id/export_database"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Export Database" />
+        <item
+            android:id="@+id/drop_table"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Drop Table" />
+	    
+    </group>
+
+   
+
+</menu>

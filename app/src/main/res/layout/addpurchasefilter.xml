@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="400dp"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Contact Name:"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/textView10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="27dp" />
+
+    <EditText
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/filterContactName"
+        android:layout_alignTop="@+id/textView6"
+        android:layout_toRightOf="@+id/savedialog"
+        android:layout_alignRight="@+id/canceldialog"
+        android:layout_alignEnd="@+id/canceldialog" />
+
+    <EditText
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/filterBillNo"
+        android:layout_alignBottom="@+id/textView10"
+        android:layout_toRightOf="@+id/textView6" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Filter"
+        android:id="@+id/savedialog"
+        android:layout_marginBottom="48dp"
+        android:onClick="AddFilters"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/textView10"
+        android:layout_toEndOf="@+id/textView10" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/canceldialog"
+        android:onClick="CancelFilter"
+        android:layout_alignTop="@+id/savedialog"
+        android:layout_toRightOf="@+id/filterBillNo"
+        android:layout_toEndOf="@+id/filterBillNo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Bill No:"
+        android:id="@+id/textView10"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="32dp" />
+
+
+</RelativeLayout>

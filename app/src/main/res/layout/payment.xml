@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+   <RadioGroup
+       android:id="@+id/paydisc"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Payment"
+        android:id="@+id/paymentRB"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Discount"
+        android:id="@+id/discountRB"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/paymentRB"
+        android:layout_toEndOf="@+id/paymentRB" />
+
+    </RadioGroup>
+
+
+    <RadioGroup
+        android:id="@+id/recmade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recieved"
+            android:id="@+id/receivedRB"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/paydisc"
+            android:layout_toEndOf="@+id/paydisc" />
+
+        <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Made"
+        android:id="@+id/madeRB"
+            android:layout_below="@+id/receivedRB"
+            android:layout_alignLeft="@+id/receivedRB"
+            android:layout_alignStart="@+id/receivedRB" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Name"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/paydisc"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="48dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/PContactSpinner"
+        android:layout_alignBottom="@+id/textView15"
+        android:layout_toRightOf="@+id/paydisc"
+        android:layout_toEndOf="@+id/paydisc" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Against"
+        android:id="@+id/textView25"
+        android:layout_below="@+id/textView15"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="43dp" />
+
+ <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Amount"
+        android:id="@+id/textView26"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/amountPayment"
+        android:layout_alignBottom="@+id/textView26"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/savePayment"
+        android:layout_marginBottom="52dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/textView26"
+        android:layout_toEndOf="@+id/textView26" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/cancelPayment"
+        android:layout_alignTop="@+id/savePayment"
+        android:layout_toLeftOf="@+id/recmade"
+        android:layout_toStartOf="@+id/recmade" />
+
+ <EditText
+     android:layout_width="250dp"
+     android:layout_height="wrap_content"
+     android:id="@+id/againstPayment"
+     android:layout_alignBottom="@+id/textView25"
+     android:layout_alignParentRight="true"
+     android:layout_alignParentEnd="true" />
+
+ <EditText
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:inputType="textPersonName"
+     android:text="Name"
+     android:ems="10"
+     android:id="@+id/dateedit"
+     android:layout_above="@+id/PContactSpinner"
+     android:layout_alignParentLeft="true"
+     android:layout_alignParentStart="true" />
+
+</RelativeLayout>

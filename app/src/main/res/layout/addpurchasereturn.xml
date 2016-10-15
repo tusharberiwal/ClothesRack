@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Item Id"
+        android:id="@+id/textView21"
+        android:layout_marginTop="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/itemIDpreturn"
+        android:layout_toStartOf="@+id/itemIDpreturn" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/itemIDpreturn"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignTop="@+id/textView21"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Size"
+        android:id="@+id/textView22"
+        android:layout_below="@+id/itemIDpreturn"
+        android:layout_alignLeft="@+id/textView21"
+        android:layout_alignStart="@+id/textView21" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sizepreturn"
+        android:layout_below="@+id/itemIDpreturn"
+        android:layout_alignRight="@+id/itemIDpreturn"
+        android:layout_alignEnd="@+id/itemIDpreturn"
+        android:layout_alignLeft="@+id/itemIDpreturn"
+        android:layout_alignStart="@+id/itemIDpreturn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Qty"
+        android:id="@+id/textView23"
+        android:layout_below="@+id/sizepreturn"
+        android:layout_alignLeft="@+id/textView22"
+        android:layout_alignStart="@+id/textView22" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/qtypreturn"
+        android:layout_below="@+id/sizepreturn"
+        android:layout_alignRight="@+id/sizepreturn"
+        android:layout_alignEnd="@+id/sizepreturn" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Cost"
+        android:id="@+id/textView24"
+        android:layout_below="@+id/qtypreturn"
+        android:layout_alignLeft="@+id/textView23"
+        android:layout_alignStart="@+id/textView23" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/costpreturn"
+        android:layout_alignTop="@+id/textView24"
+        android:layout_alignLeft="@+id/qtypreturn"
+        android:layout_alignStart="@+id/qtypreturn" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/addpreturn"
+        android:onClick="AddPRetToList"
+        android:layout_marginTop="95dp"
+        android:layout_below="@+id/costpreturn"
+        android:layout_toRightOf="@+id/textView22"
+        android:layout_toEndOf="@+id/textView22" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/cancelAddpreturn"
+        android:layout_alignTop="@+id/addpreturn"
+        android:layout_alignRight="@+id/costpreturn"
+        android:layout_alignEnd="@+id/costpreturn" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="'?'"
+        android:id="@+id/search"
+        android:onClick="search"
+        android:layout_above="@+id/sizepreturn"
+        android:layout_toRightOf="@+id/itemIDpreturn"
+        android:layout_toEndOf="@+id/itemIDpreturn" />
+</RelativeLayout>

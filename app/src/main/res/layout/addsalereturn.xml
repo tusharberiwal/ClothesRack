@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Item Id"
+        android:id="@+id/textView21"
+        android:layout_marginTop="45dp"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/itemIDsale"
+        android:layout_toStartOf="@+id/itemIDsale" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/itemIDsale"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignTop="@+id/textView21"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Size"
+        android:id="@+id/textView22"
+        android:layout_below="@+id/itemIDsale"
+        android:layout_alignLeft="@+id/textView21"
+        android:layout_alignStart="@+id/textView21" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sizeSale"
+        android:layout_below="@+id/itemIDsale"
+        android:layout_alignRight="@+id/itemIDsale"
+        android:layout_alignEnd="@+id/itemIDsale"
+        android:layout_alignLeft="@+id/itemIDsale"
+        android:layout_alignStart="@+id/itemIDsale" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Qty"
+        android:id="@+id/textView23"
+        android:layout_below="@+id/sizeSale"
+        android:layout_alignLeft="@+id/textView22"
+        android:layout_alignStart="@+id/textView22" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/qtySale"
+        android:layout_below="@+id/sizeSale"
+        android:layout_alignRight="@+id/sizeSale"
+        android:layout_alignEnd="@+id/sizeSale" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Cost"
+        android:id="@+id/textView24"
+        android:layout_below="@+id/qtySale"
+        android:layout_alignLeft="@+id/textView23"
+        android:layout_alignStart="@+id/textView23" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/costSale"
+        android:layout_alignTop="@+id/textView24"
+        android:layout_alignLeft="@+id/qtySale"
+        android:layout_alignStart="@+id/qtySale" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/addSale"
+        android:onClick="AddSaleToList"
+        android:layout_marginTop="95dp"
+        android:layout_below="@+id/costSale"
+        android:layout_toRightOf="@+id/textView22"
+        android:layout_toEndOf="@+id/textView22" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/cancelAddSale"
+        android:layout_alignTop="@+id/addSale"
+        android:layout_alignRight="@+id/costSale"
+        android:layout_alignEnd="@+id/costSale" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="'?'"
+        android:id="@+id/search"
+        android:onClick="search"
+        android:layout_above="@+id/sizeSale"
+        android:layout_toRightOf="@+id/itemIDsale"
+        android:layout_toEndOf="@+id/itemIDsale" />
+</RelativeLayout>
