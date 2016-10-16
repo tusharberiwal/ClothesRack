@@ -1,6 +1,8 @@
 package com.example.rushabh.clothesrack;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -99,10 +101,11 @@ public class EditPurchase extends Activity implements View.OnClickListener{
                     //tempProduct=;
                     String tempCost=cursor.getString(cursor.getColumnIndex("Cost"));
                     String tempQTY=cursor.getString(cursor.getColumnIndex("PQty"));
+                    String tempSize= db.getItemSize(itemID);
 
                     pm.setBrand(details.get(0));
                     pm.setProduct(details.get(1));
-                    pm.setSize(" ");
+                    pm.setSize(tempSize);
                     pm.setQty(tempQTY);
                     pm.setCost(tempCost);
                     pm.setMrp(cursor.getString(cursor.getColumnIndex("MRP")));
@@ -177,6 +180,8 @@ public class EditPurchase extends Activity implements View.OnClickListener{
         TextView tempQty ;
         TextView tempMRP ;
         TextView tempitemid;
+        final ArrayList<BarCodePrintModel> barCodeData= new ArrayList<BarCodePrintModel>();
+        BarCodePrintModel barCodePrintModel = new BarCodePrintModel();
         if(count>0) {
             for (int i = 0; i < count; i++) {
 
@@ -187,42 +192,82 @@ public class EditPurchase extends Activity implements View.OnClickListener{
                 tempCost = (TextView) v.findViewById(R.id.cost);
                 tempQty = (TextView) v.findViewById(R.id.qtys);
                 tempMRP = (TextView) v.findViewById(R.id.mrps);
-                tempitemid=(TextView)v.findViewById(R.id.itemid);
+                tempitemid = (TextView) v.findViewById(R.id.itemid);
                 String tempProductID = db.getProductID(tempProduct.getText().toString());
                 String tempBrandID = db.getBrandID(tempBrand.getText().toString());
-                int tempTotal=Integer.parseInt(((TextView)v.findViewById(R.id.totall)).getText().toString());
-                grandTotal+=tempTotal;
+                int tempTotal = Integer.parseInt(((TextView) v.findViewById(R.id.totall)).getText().toString());
+                grandTotal += tempTotal;
 
-                if(i<countdb)
-                {
-                    int dbqty=db.getPurchaseDetailQty(tempitemid.getText().toString());
+                if (i < countdb) {
+                    int dbqty = db.getPurchaseDetailQty(tempitemid.getText().toString());
                     int qty = Integer.valueOf(tempQty.getText().toString());
                     int stockqty = db.getStockQty(tempitemid.getText().toString());
-                    if(qty==dbqty){
+                    if (qty == dbqty) {
 
-                    }
-                    else if(qty<dbqty)
-                    {
+                    } else if (qty < dbqty) {
 
-                        int updateqty= dbqty-qty;
-                       stockqty = stockqty - updateqty;
+                        int updateqty = dbqty - qty;
+                        stockqty = stockqty - updateqty;
+                    } else if (dbqty < qty) {
+                        int updateqty = qty - dbqty;
+                        stockqty = stockqty + updateqty;
                     }
-                    else if(dbqty<qty)
-                    {
-                        int updateqty = qty-dbqty;
-                        stockqty = stockqty +updateqty;
-                    }
-                    db.updateStock(tempBrandID,tempProductID,stockqty,tempSize.getText().toString(),tempitemid.getText().toString(),date);
-                    db.updatePurchaseDetails(qty,tempCost.getText().toString(),tempMRP.getText().toString(),tempitemid.getText().toString(),date);
-                }
-                else {
+                    db.updateStock(tempBrandID, tempProductID, stockqty, tempSize.getText().toString(), tempitemid.getText().toString(), date);
+                    db.updatePurchaseDetails(qty, tempCost.getText().toString(), tempMRP.getText().toString(), tempitemid.getText().toString(), date);
+
+
+                } else {
                     db.insertStock(tempBrandID, tempProductID, tempSize.getText().toString(), tempQty.getText().toString(), date);
                     itemid = db.getStockItemID();
                     db.insertPurchaseDetails(itemid, purchaseID, tempQty.getText().toString(), tempCost.getText().toString(), tempMRP.getText().toString(), date);
+
+
                 }
+                String tempproduct1, tempbrand1, tempsize1;
+                barCodePrintModel.Product = tempproduct1 = ((TextView) v.findViewById(R.id.products)).getText().toString();
+                barCodePrintModel.Brand = tempbrand1 = ((TextView) v.findViewById(R.id.brands)).getText().toString();
+                barCodePrintModel.Size = tempsize1 = ((TextView) v.findViewById(R.id.size)).getText().toString();
+                barCodePrintModel.ItemID = ((TextView) v.findViewById(R.id.itemid)).getText().toString();
+
+                for (int j = 0; j < Integer.parseInt(((TextView) v.findViewById(R.id.qtys)).getText().toString()); j++)
+                    barCodeData.add(barCodePrintModel);
             }
 
         }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(EditPurchase.this);
+
+
+            builder.setTitle("Confirm");
+            builder.setMessage("Do you want to print the Bar Codes?");
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+
+                    //Toast.makeText(getContext(),"You clicked yes button",Toast.LENGTH_LONG).show();
+                    BarCodePrint bcp = new BarCodePrint();
+                    bcp.getDataForBarCodePrint(barCodeData);
+                    //dialog.dismiss();
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // Do nothing
+                    //dialog.dismiss();
+
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+
+
+
     }
 
 

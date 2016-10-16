@@ -50,6 +50,8 @@ public class test  extends Fragment {
 
             }
         });
+
+
     return myview;
     }
 
