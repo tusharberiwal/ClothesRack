@@ -175,7 +175,7 @@ public  class Purchase extends Fragment implements View.OnClickListener{
         String tempBrand ;
         String tempSize ;
         TextView tempCost ;
-        TextView tempQty ;
+        String tempQty ;
         TextView tempMRP ;
         final ArrayList<BarCodePrintModel> barCodeData= new ArrayList<BarCodePrintModel>();
         if(count>0) {
@@ -186,7 +186,7 @@ public  class Purchase extends Fragment implements View.OnClickListener{
                 barCodePrintModel.Brand=tempBrand = ((TextView) v.findViewById(R.id.brands)).getText().toString();
                 barCodePrintModel.Size=tempSize = ((TextView) v.findViewById(R.id.size)).getText().toString();
                 tempCost = (TextView) v.findViewById(R.id.cost);
-                tempQty = (TextView) v.findViewById(R.id.qtys);
+                tempQty = ((TextView) v.findViewById(R.id.qtys)).getText().toString();
                 tempMRP = (TextView) v.findViewById(R.id.mrps);
 
                 int tempTotal=Integer.parseInt(((TextView)v.findViewById(R.id.totall)).getText().toString());
@@ -194,9 +194,11 @@ public  class Purchase extends Fragment implements View.OnClickListener{
                 String tempProductID= db.getProductID(tempProduct);
                 String tempBrandID= db.getBrandID(tempBrand);;
 
-                db.insertStock(tempBrandID,tempProductID,tempSize,tempQty.getText().toString(),date);
+                db.insertStock(tempBrandID,tempProductID,tempSize,tempQty,date);
                 barCodePrintModel.ItemID=itemid = db.getStockItemID();
-                db.insertPurchaseDetails(itemid,purchaseID,tempQty.getText().toString(),tempCost.getText().toString(),tempMRP.getText().toString(),date);
+                db.insertPurchaseDetails(itemid,purchaseID,tempQty,tempCost.getText().toString(),tempMRP.getText().toString(),date);
+
+                for(int j=0;j<Integer.parseInt(tempQty);j++)
                 barCodeData.add(barCodePrintModel);
 
             }
