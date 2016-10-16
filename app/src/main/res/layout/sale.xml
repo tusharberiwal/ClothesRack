@@ -95,20 +95,6 @@
         android:layout_toLeftOf="@+id/addcontact"
         android:layout_toStartOf="@+id/addcontact" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="Name"
-        android:ems="10"
-        android:layout_toRightOf="@+id/billno"
-        android:layout_toEndOf="@+id/billno"
-        android:layout_marginLeft="65dp"
-        android:layout_marginStart="65dp"
-        android:id="@+id/dateedit"
-        android:textAppearance="@android:style/TextAppearance.Small"
-        android:layout_alignBottom="@+id/textView16" />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -125,5 +111,17 @@
         android:layout_toRightOf="@+id/cancelSale"
         android:layout_toEndOf="@+id/cancelSale"
         android:id="@+id/grandTotal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Name"
+        android:ems="10"
+        android:id="@+id/dateedit"
+        android:textAppearance="@android:style/TextAppearance.Small"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

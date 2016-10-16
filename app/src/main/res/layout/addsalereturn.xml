@@ -102,7 +102,8 @@
         android:id="@+id/cancelAddSale"
         android:layout_alignTop="@+id/addSale"
         android:layout_alignRight="@+id/costSale"
-        android:layout_alignEnd="@+id/costSale" />
+        android:layout_alignEnd="@+id/costSale"
+        android:onClick="canceladdsaleret"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"

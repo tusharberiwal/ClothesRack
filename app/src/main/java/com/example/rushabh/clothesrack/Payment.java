@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,7 +114,8 @@ public class Payment extends Fragment implements View.OnClickListener {
             }
             case R.id.cancelPayment:
             {
-                getid();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(this).attach(this).commit();
                 break;
             }
             case R.id.dateedit:
