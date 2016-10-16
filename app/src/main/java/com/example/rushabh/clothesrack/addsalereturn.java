@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -94,31 +95,54 @@ public class addsalereturn extends Activity {
         }
     }
     public void AddSaleToList(View view){
-        String tempBrand,tempProduct;
+
+        if(!isAnyFieldEmpty(itemIDSale,sizeSale,qtySale,costSale)) {
+
+              String tempBrand, tempProduct;
 
 
-        List<String> details = new ArrayList<>();
-        details= db.getBrandFromItem(itemIDSale.getText().toString());
-        tempBrand= details.get(0);
-        tempProduct=details.get(1);
+            List<String> details = new ArrayList<>();
+            details = db.getBrandFromItem(itemIDSale.getText().toString());
+            tempBrand = details.get(0);
+            tempProduct = details.get(1);
             Bundle b = new Bundle();
             b.putString("brand", tempBrand);
             b.putString("product", tempProduct);
             b.putString("size", sizeSale.getText().toString());
             b.putString("quantity", qtySale.getText().toString());
             b.putString("mrp", costSale.getText().toString());
-            b.putString("itemid",itemIDSale.getText().toString());
-        b.putString("srno",srno);
-             if(pos!=-1)
-               b.putInt("editPosition",pos);
-             else
-               b.putInt("editPosition",-1);
+            b.putString("itemid", itemIDSale.getText().toString());
+            b.putString("srno", srno);
+            if (pos != -1)
+                b.putInt("editPosition", pos);
+            else
+                b.putInt("editPosition", -1);
 
             Intent ini = new Intent(getApplicationContext(), Sale.class);
             ini.putExtras(b);
             setResult(RESULT_OK, ini);
             finish();
+        }
+    }
 
+    public boolean isAnyFieldEmpty(EditText itemIDSale,EditText sizeSale,EditText qtySale, EditText costSale)
+    {
+        if(checkEditText(itemIDSale,"ItemID") && checkEditText(sizeSale,"Size")
+                && checkEditText(qtySale,"Qty") &&checkEditText(costSale,"Cost")) {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public boolean checkEditText(EditText edtTxt,String toastMessage)
+    {
+        if(TextUtils.isEmpty(edtTxt.getText().toString())) {
+            edtTxt.setError("Field cannot be blank");
+            Toast.makeText(this, "Please Enter "+toastMessage, Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 
     public void search(View view){

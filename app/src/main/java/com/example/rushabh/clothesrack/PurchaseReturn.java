@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -259,10 +259,9 @@ public  class PurchaseReturn extends Fragment implements View.OnClickListener{
             case R.id.savepr:
             {
                 savedata();
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.detach(this).attach(this).commit();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame,new PurchaseReturn()).commit();
                 break;
-
             }
             case R.id.dateedit:
             {
@@ -274,8 +273,8 @@ public  class PurchaseReturn extends Fragment implements View.OnClickListener{
             }
             case R.id.cancelpr:
             {
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.detach(this).attach(this).commit();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame,new PurchaseReturn()).commit();
                 break;
             }
             case R.id.grandTotal:{

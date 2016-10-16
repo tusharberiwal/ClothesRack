@@ -4,16 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -37,7 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static android.content.Context.WINDOW_SERVICE;
+//import android.support.v4.app.Fragment;
 
 /**
  * Created by tushar on 9/25/2016.
@@ -140,24 +136,27 @@ public class BarCodePrint {
 
             for (int i = 0; i < size; i++) {
 
-                Bitmap bmp = createQRCode(barCodePrintModel.get(i).ItemID);
+                    Bitmap bmp = createQRCode(barCodePrintModel.get(i).ItemID);
 
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                Image image = Image.getInstance(stream.toByteArray());
-                image.scaleAbsolute(75, 75);
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    bmp.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    Image image = Image.getInstance(stream.toByteArray());
+                    image.scaleAbsolute(75, 75);
 
-                PdfPCell cell = new PdfPCell();
-                cell.addElement(image);
+                    PdfPCell cell = new PdfPCell();
+                    cell.addElement(image);
 
-                cell.addElement(setBarCodeLabel(barCodePrintModel.get(i).ItemID));
-                cell.addElement(setBarCodeLabel(barCodePrintModel.get(i).Product));
-                cell.addElement(setBarCodeLabel(barCodePrintModel.get(i).Brand));
-                cell.addElement(setBarCodeLabel(barCodePrintModel.get(i).Size));
+                    cell.addElement(setBarCodeLabel(barCodePrintModel.get(i).ItemID));
+                    cell.addElement(setBarCodeLabel(barCodePrintModel.get(i).Product));
+                    cell.addElement(setBarCodeLabel(barCodePrintModel.get(i).Brand));
+                    cell.addElement(setBarCodeLabel(barCodePrintModel.get(i).Size));
 
-                BarCodeTable.addCell(cell);
+                    BarCodeTable.addCell(cell);
+
+
 
             }
+            BarCodeTable.completeRow();
             return BarCodeTable;
         } catch (IOException ex) {
 

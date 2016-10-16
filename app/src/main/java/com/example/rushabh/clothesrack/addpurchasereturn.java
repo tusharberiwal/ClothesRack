@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -96,38 +97,58 @@ public class addpurchasereturn extends Activity {
     }
 
 
-    public void AddPRetToList(View view){
-        String tempBrand,tempProduct;
+    public void AddPRetToList(View view) {
+        if (!isAnyFieldEmpty(itemIDpreturn,sizepreturn,qtypreturn,costpreturn)) {
+            String tempBrand, tempProduct;
 
-        int stqty= db.getStockQty(itemIDpreturn.getText().toString());
-        int qty = Integer.valueOf(qtypreturn.getText().toString());
+            int stqty = db.getStockQty(itemIDpreturn.getText().toString());
+            int qty = Integer.valueOf(qtypreturn.getText().toString());
 
-        if(stqty>=qty) {
-            List<String> details = new ArrayList<>();
-            details = db.getBrandFromItem(itemIDpreturn.getText().toString());
-            tempBrand = details.get(0);
-            tempProduct = details.get(1);
-            Bundle b = new Bundle();
-            b.putString("brand", tempBrand);
-            b.putString("product", tempProduct);
-            b.putString("size", sizepreturn.getText().toString());
-            b.putString("quantity", qtypreturn.getText().toString());
-            b.putString("cost", costpreturn.getText().toString());
-            b.putString("itemid", itemIDpreturn.getText().toString());
-            b.putString("srno",srno);
-            if (pos != -1)
-                b.putInt("editPosition", pos);
-            else
-                b.putInt("editPosition", -1);
+            if (stqty >= qty) {
+                List<String> details = new ArrayList<>();
+                details = db.getBrandFromItem(itemIDpreturn.getText().toString());
+                tempBrand = details.get(0);
+                tempProduct = details.get(1);
+                Bundle b = new Bundle();
+                b.putString("brand", tempBrand);
+                b.putString("product", tempProduct);
+                b.putString("size", sizepreturn.getText().toString());
+                b.putString("quantity", qtypreturn.getText().toString());
+                b.putString("cost", costpreturn.getText().toString());
+                b.putString("itemid", itemIDpreturn.getText().toString());
+                b.putString("srno", srno);
+                if (pos != -1)
+                    b.putInt("editPosition", pos);
+                else
+                    b.putInt("editPosition", -1);
 
-            Intent ini = new Intent(getApplicationContext(), PurchaseReturn.class);
-            ini.putExtras(b);
-            setResult(RESULT_OK, ini);
-            finish();
+                Intent ini = new Intent(getApplicationContext(), PurchaseReturn.class);
+                ini.putExtras(b);
+                setResult(RESULT_OK, ini);
+                finish();
+            } else
+                Toast.makeText(getApplicationContext(), "Insufficient Quantity", Toast.LENGTH_LONG).show();
+
+        }
+    }
+    public boolean isAnyFieldEmpty(EditText itemIDpreturn,EditText sizepreturn,EditText qtypreturn, EditText costpreturn)
+    {
+        if(checkEditText(itemIDpreturn,"ItemID") && checkEditText(sizepreturn,"Size")
+                && checkEditText(qtypreturn,"Qty") &&checkEditText(costpreturn,"Cost")) {
+            return true;
         }
         else
-            Toast.makeText(getApplicationContext(),"Insufficient Quantity",Toast.LENGTH_LONG).show();
+            return false;
+    }
 
+    public boolean checkEditText(EditText edtTxt,String toastMessage)
+    {
+        if(TextUtils.isEmpty(edtTxt.getText().toString())) {
+            edtTxt.setError("Field cannot be blank");
+            Toast.makeText(this, "Please Enter "+toastMessage, Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 
     public void search(View view){
