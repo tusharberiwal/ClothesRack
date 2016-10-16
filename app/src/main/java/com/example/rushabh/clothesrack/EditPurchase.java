@@ -152,40 +152,40 @@ public class EditPurchase extends Activity implements View.OnClickListener{
         //loadSpinnerDataName();
     }
 
-    public void savedata(){
+    public void savedata() {
 
-  //Have to edit below code to update instaed of save data
-        String purid=ID;
+        //Have to edit below code to update instaed of save data
+        String purid = ID;
         int countdb = db.getCountPurchaseDetails(purid);
 
         String date = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS").format(new Date());
 
-        EditText comment = (EditText)findViewById(R.id.purComment);
+        EditText comment = (EditText) findViewById(R.id.purComment);
         String Cname = spinner.getSelectedItem().toString();
-        String cid=db.getContactID(Cname);
-        int grandTotal=0;
+        String cid = db.getContactID(Cname);
+        int grandTotal = 0;
 
-        db.updatePurchase(billno.getText().toString(),cid.toString(),date,"123",comment.getText().toString(),date,purid);
+        db.updatePurchase(billno.getText().toString(), cid.toString(), date, "123", comment.getText().toString(), date, purid);
 
-        String purchaseID=db.getPurID();
-        ListView listView = (ListView)findViewById(R.id.purListView1);
+        String purchaseID = db.getPurID();
+        ListView listView = (ListView) findViewById(R.id.purListView1);
 
-        View v ;
-        int count=  listView.getChildCount();
-         String itemid;
-        TextView tempProduct ;
-        TextView tempBrand ;
-        TextView tempSize ;
-        TextView tempCost ;
-        TextView tempQty ;
-        TextView tempMRP ;
+        View v;
+        int count = listView.getChildCount();
+        String itemid;
+        TextView tempProduct;
+        TextView tempBrand;
+        TextView tempSize;
+        TextView tempCost;
+        TextView tempQty;
+        TextView tempMRP;
         TextView tempitemid;
-        final ArrayList<BarCodePrintModel> barCodeData= new ArrayList<BarCodePrintModel>();
-        BarCodePrintModel barCodePrintModel = new BarCodePrintModel();
-        if(count>0) {
-            for (int i = 0; i < count; i++) {
+        final ArrayList<BarCodePrintModel> barCodeData = new ArrayList<BarCodePrintModel>();
 
-                v = listView.getChildAt(i);
+        if (count > 0) {
+            for (int i = 0; i < count; i++) {
+                BarCodePrintModel barCodePrintModel = new BarCodePrintModel();
+                v = listView.getAdapter().getView(i,null,null);
                 tempProduct = (TextView) v.findViewById(R.id.products);
                 tempBrand = (TextView) v.findViewById(R.id.brands);
                 tempSize = (TextView) v.findViewById(R.id.size);
@@ -223,6 +223,7 @@ public class EditPurchase extends Activity implements View.OnClickListener{
 
 
                 }
+
                 String tempproduct1, tempbrand1, tempsize1;
                 barCodePrintModel.Product = tempproduct1 = ((TextView) v.findViewById(R.id.products)).getText().toString();
                 barCodePrintModel.Brand = tempbrand1 = ((TextView) v.findViewById(R.id.brands)).getText().toString();
@@ -233,40 +234,40 @@ public class EditPurchase extends Activity implements View.OnClickListener{
                     barCodeData.add(barCodePrintModel);
             }
 
-        }
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(EditPurchase.this);
 
 
-            builder.setTitle("Confirm");
-            builder.setMessage("Do you want to print the Bar Codes?");
-
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int which) {
-
-                    //Toast.makeText(getContext(),"You clicked yes button",Toast.LENGTH_LONG).show();
-                    BarCodePrint bcp = new BarCodePrint();
-                    bcp.getDataForBarCodePrint(barCodeData);
-                    //dialog.dismiss();
-                }
-            });
-
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditPurchase.this);
 
 
-                public void onClick(DialogInterface dialog, int which) {
+        builder.setTitle("Confirm");
+        builder.setMessage("Do you want to print the Bar Codes?");
 
-                    // Do nothing
-                    //dialog.dismiss();
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
-                }
-            });
+            public void onClick(DialogInterface dialog, int which) {
 
-            AlertDialog alert = builder.create();
-            alert.show();
+                //Toast.makeText(getContext(),"You clicked yes button",Toast.LENGTH_LONG).show();
+                BarCodePrint bcp = new BarCodePrint();
+                bcp.getDataForBarCodePrint(barCodeData);
+                //dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
 
 
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                //dialog.dismiss();
+
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
 
     }
 
