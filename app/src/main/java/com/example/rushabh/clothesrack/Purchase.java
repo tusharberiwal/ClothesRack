@@ -1,6 +1,8 @@
 package com.example.rushabh.clothesrack;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
@@ -167,34 +169,70 @@ public  class Purchase extends Fragment implements View.OnClickListener{
         ListView listView = (ListView)myview.findViewById(R.id.purListView1);
 
         View v ;
-        int count=  listView.getChildCount();
+        int count=  listView.getAdapter().getCount();
         String itemid;
-        TextView tempProduct ;
-        TextView tempBrand ;
-        TextView tempSize ;
+        String tempProduct ;
+        String tempBrand ;
+        String tempSize ;
         TextView tempCost ;
         TextView tempQty ;
         TextView tempMRP ;
+        final ArrayList<BarCodePrintModel> barCodeData= new ArrayList<BarCodePrintModel>();
         if(count>0) {
             for (int i = 0; i < count; i++) {
-                v = listView.getChildAt(i);
-                tempProduct = (TextView) v.findViewById(R.id.products);
-                tempBrand = (TextView) v.findViewById(R.id.brands);
-                tempSize = (TextView) v.findViewById(R.id.size);
+                BarCodePrintModel barCodePrintModel = new BarCodePrintModel();
+                v = listView.getAdapter().getView(i,null,null);
+                barCodePrintModel.Product=tempProduct = ((TextView) v.findViewById(R.id.products)).getText().toString();
+                barCodePrintModel.Brand=tempBrand = ((TextView) v.findViewById(R.id.brands)).getText().toString();
+                barCodePrintModel.Size=tempSize = ((TextView) v.findViewById(R.id.size)).getText().toString();
                 tempCost = (TextView) v.findViewById(R.id.cost);
                 tempQty = (TextView) v.findViewById(R.id.qtys);
                 tempMRP = (TextView) v.findViewById(R.id.mrps);
 
                 int tempTotal=Integer.parseInt(((TextView)v.findViewById(R.id.totall)).getText().toString());
                 grandTotal+=tempTotal;
-                String tempProductID= db.getProductID(tempProduct.getText().toString());
-                String tempBrandID= db.getBrandID(tempBrand.getText().toString());;
+                String tempProductID= db.getProductID(tempProduct);
+                String tempBrandID= db.getBrandID(tempBrand);;
 
-                db.insertStock(tempBrandID,tempProductID,tempSize.getText().toString(),tempQty.getText().toString(),date);
-                itemid = db.getStockItemID();
+                db.insertStock(tempBrandID,tempProductID,tempSize,tempQty.getText().toString(),date);
+                barCodePrintModel.ItemID=itemid = db.getStockItemID();
                 db.insertPurchaseDetails(itemid,purchaseID,tempQty.getText().toString(),tempCost.getText().toString(),tempMRP.getText().toString(),date);
+                barCodeData.add(barCodePrintModel);
 
             }
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+
+
+            builder.setTitle("Confirm");
+            builder.setMessage("Do you want to print the Bar Codes?");
+
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int which) {
+
+                    //Toast.makeText(getContext(),"You clicked yes button",Toast.LENGTH_LONG).show();
+                    BarCodePrint bcp = new BarCodePrint();
+                    bcp.getDataForBarCodePrint(barCodeData);
+                    //dialog.dismiss();
+                }
+            });
+
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+
+                public void onClick(DialogInterface dialog, int which) {
+
+                    // Do nothing
+                    //dialog.dismiss();
+
+                }
+            });
+
+            AlertDialog alert = builder.create();
+            alert.show();
+
             db.updatePurchasewithBillAMt(purchaseID,Integer.toString(grandTotal));
 
         }

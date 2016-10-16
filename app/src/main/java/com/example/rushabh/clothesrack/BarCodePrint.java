@@ -43,7 +43,7 @@ import static android.content.Context.WINDOW_SERVICE;
  * Created by tushar on 9/25/2016.
  */
 
-public class BarCodePrint extends Fragment implements View.OnClickListener {
+public class BarCodePrint {
 
     View myView;
     TextView BarCodeValues;
@@ -52,40 +52,26 @@ public class BarCodePrint extends Fragment implements View.OnClickListener {
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.barcodeprint, container, false);
-        printBarCodes = (Button) myView.findViewById(R.id.printBarCode);
-        printBarCodes.setOnClickListener(this);
-        //BarCodeValues = (TextView) myView.findViewById(R.id.barCodeValues);
-        //getDataForBarCodePrint();
         return myView;
     }
 
-    public void getDataForBarCodePrint(int value)
+    public void getDataForBarCodePrint(ArrayList<BarCodePrintModel> barCodeData)
     {
-        barCodePrintModel = new ArrayList<BarCodePrintModel>();
+        barCodePrintModel = new ArrayList<BarCodePrintModel>(barCodeData);
+        if(barCodePrintModel!=null && barCodePrintModel.size()>0) {
+            try {
+                printBarCodeValues();
+            }
+            catch (Exception e) {
+                Log.v("", e.getMessage().toString());
+            }
 
-        for(int i=1;i<=value;i++) {
-        BarCodePrintModel tempBarcodeModel = new BarCodePrintModel();
-            tempBarcodeModel.ItemID="Item"+Integer.toString(i);
-            tempBarcodeModel.Product="Product"+Integer.toString(i);
-            tempBarcodeModel.Brand="Brand"+Integer.toString(i);
-            tempBarcodeModel.Size="Size"+Integer.toString(i);
-            barCodePrintModel.add(tempBarcodeModel);
-        }
-
-
+}
     }
 
     public Bitmap createQRCode(String qrInputText) {
-        //EditText qrInput = (EditText) myView.findViewById(R.id.barCodeValues);
-        //String qrInputText = qrInput.getText().toString();
-        //Log.v(LOG_TAG, qrInputText);
-
-        //Find screen size
-        WindowManager manager = (WindowManager) getContext().getSystemService(WINDOW_SERVICE);
-        Display display = manager.getDefaultDisplay();
         Point point = new Point();
-        display.getSize(point);
+        //display.getSize(point);
         int width = point.x;
         int height = point.y;
         int smallerDimension = width < height ? width : height;
@@ -111,9 +97,9 @@ public class BarCodePrint extends Fragment implements View.OnClickListener {
     }
 
     public void printBarCodeValues() throws FileNotFoundException, DocumentException {
-        String value = ((TextView) myView.findViewById(R.id.barCodeValues)).getText().toString();
+        //String value = ((TextView) myView.findViewById(R.id.barCodeValues)).getText().toString();
 
-        getDataForBarCodePrint(Integer.parseInt(value));
+        //getDataForBarCodePrint(Integer.parseInt(value));
 
         File pdfFolder = new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOCUMENTS), "pdfdemo");
@@ -141,7 +127,7 @@ public class BarCodePrint extends Fragment implements View.OnClickListener {
 
 
         document.close();
-        Toast.makeText(getContext(), "PDF print Complete", Toast.LENGTH_LONG).show();
+        //Toast.makeText(BarCodePrint, "PDF print Complete", Toast.LENGTH_LONG).show();
 
     }
 
@@ -185,20 +171,5 @@ public class BarCodePrint extends Fragment implements View.OnClickListener {
         tempPara.setAlignment(Element.ALIGN_CENTER);
         return tempPara;
     }
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.printBarCode: {
-                try {
-                    printBarCodeValues();
-                } catch (Exception e) {
-                    Log.v("",e.getMessage().toString());
-                }
 
-                break;
-            }
-
-
-        }
-    }
 }
