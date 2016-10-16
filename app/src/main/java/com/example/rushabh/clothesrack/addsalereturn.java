@@ -137,4 +137,8 @@ public class addsalereturn extends Activity {
             costSale.setText(temp1);
         }
     }
+    public void canceladdsaleret(View view){
+        finish();
+    }
+
 }

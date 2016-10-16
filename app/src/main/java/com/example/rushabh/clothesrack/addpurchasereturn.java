@@ -141,4 +141,8 @@ public class addpurchasereturn extends Activity {
        costpreturn.setText(temp1);
 
     }
+    public void canceladdpurchaseret(View view){
+        finish();
+    }
+
 }

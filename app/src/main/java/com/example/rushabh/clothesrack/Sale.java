@@ -200,6 +200,7 @@ public class Sale extends Fragment implements View.OnClickListener {
 
 
     public void savedata(){
+        checknull();
 
         String Cname = saleContactSpinner.getSelectedItem().toString();
         String date = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS").format(new Date());
@@ -342,4 +343,10 @@ public class Sale extends Fragment implements View.OnClickListener {
         grandTotal.setText(String.valueOf(gtotal));
     }
 
+
+    public void checknull()
+    {
+
+
+    }
 }
