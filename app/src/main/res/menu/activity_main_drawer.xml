@@ -39,9 +39,9 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="Test" />
        <item
-            android:id="@+id/printBarCodes"
+            android:id="@+id/show_invoice"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Print BarCode" />
+            android:title="Show Invoice" />
         <item
             android:id="@+id/export_database"
             android:icon="@drawable/ic_menu_manage"

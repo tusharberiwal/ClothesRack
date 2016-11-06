@@ -59,4 +59,5 @@ dependencies {
 // Older version    s e.g. 2.2 may also work if you need support for older Android versions.
     compile 'com.google.zxing:core:3.0.1'
 
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha1'
 }
