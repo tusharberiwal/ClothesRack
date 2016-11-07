@@ -123,7 +123,7 @@ public class createInvoice extends Fragment implements View.OnClickListener {
 
 private void addInvoiceExtras(Document document) throws DocumentException
 {
-    addGaps(" ", document, subFont1, 10);
+    //addGaps(" ", document, subFont1, 10);
 
     PdfPCell displayString,gtotal;
     PdfPTable totalTable = new PdfPTable(2);
@@ -188,6 +188,40 @@ private void addInvoiceExtras(Document document) throws DocumentException
         extras.setColspan(3);
         customerDetailsTable.addCell(extras);
         document.add(customerDetailsTable);
+
+        addGaps(" ", document, subFont1, 1 );
+
+        PdfPTable table2 = new PdfPTable(5);
+        float[] columnWidths = new float[] {10f, 30f, 10f, 10f,10f};
+        table2.setWidths(columnWidths);
+        PdfPCell prod1;
+        PdfPCell qty1,sr1,rate1,total1;
+
+        sr1 = new PdfPCell(new Paragraph("Sr no.",subFont2));
+        sr1.setBorderWidth(1);
+        table2.addCell(sr1);
+
+        prod1 = new PdfPCell(new Paragraph("Description",subFont2));
+        prod1.setBorderWidth(1);
+        table2.addCell(prod1);
+        qty1 = new PdfPCell(new Paragraph("Quantity",subFont2));
+        qty1.setBorderWidth(1);
+        table2.addCell(qty1);
+        rate1 = new PdfPCell(new Paragraph("Rate",subFont2));
+        rate1.setBorderWidth(1);
+        table2.addCell(rate1);
+        total1 = new PdfPCell(new Paragraph("Total",subFont2));
+        total1.setBorderWidthBottom(2f);
+
+
+
+
+        PdfPTable tableNew = new PdfPTable(1);
+
+        PdfPCell a=new PdfPCell(table2);
+        a.setFixedHeight(300f);
+        tableNew.addCell(a);
+        document.add(tableNew);
     }
     private static void addTitlePage(Document document)
             throws DocumentException {
