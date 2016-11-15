@@ -216,10 +216,10 @@ public class MainActivity extends AppCompatActivity
         {
             fragmentManager.beginTransaction().replace(R.id.content_frame,new PurchaseBill()).commit();
         }
-//        else if (id==R.id.printBarCodes)
-//        {
-//            fragmentManager.beginTransaction().replace(R.id.content_frame,new BarCodePrint()).commit();
-//        }
+        else if (id==R.id.show_invoice)
+        {
+            fragmentManager.beginTransaction().replace(R.id.content_frame,new createInvoice()).commit();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
