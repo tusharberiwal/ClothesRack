@@ -165,6 +165,10 @@ public class MainActivity extends AppCompatActivity
             fragmentManager.beginTransaction().replace(R.id.content_frame,new test()).commit();
         }
 
+        else if (id==R.id.nav_contact){
+            fragmentManager.beginTransaction().replace(R.id.content_frame,new Contact()).commit();
+
+        }
         else if (id == R.id.export_database) {
             try {
                 String sPackageName = "com.example.rushabh.clothesrack";

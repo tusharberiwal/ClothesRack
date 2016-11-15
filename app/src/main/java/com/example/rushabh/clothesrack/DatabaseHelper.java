@@ -1054,6 +1054,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public Cursor populateContact(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "Select * From "+Table_Contacts;
+        Cursor cursor= db.rawQuery(selectQuery,null);
+        return cursor;
+    }
+
 
 
 
