@@ -211,6 +211,7 @@ private void addInvoiceExtras(Document document) throws DocumentException
         rate1.setBorderWidth(1);
         table2.addCell(rate1);
         total1 = new PdfPCell(new Paragraph("Total",subFont2));
+
         total1.setBorderWidthBottom(2f);
 
 
