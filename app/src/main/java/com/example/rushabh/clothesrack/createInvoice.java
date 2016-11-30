@@ -150,7 +150,7 @@ private void addInvoiceExtras(Document document) throws DocumentException
     displayString.setBorderWidth(1);
     signatureTable.addCell(displayString);
 
-    displayString = new PdfPCell(new Paragraph("RUSHABH PAREKH AND COMPANY\n\n\n\n                 Authorized Signatory",subFont4));
+    displayString = new PdfPCell(new Paragraph("RUSHABH PAREKH AND TUSHAR BERIWALp\n\n\n\n                 Authorized Signatory",subFont4));
     displayString.setFixedHeight(60f);
     displayString.setBorderWidth(1);
     signatureTable.addCell(displayString);
@@ -211,15 +211,14 @@ private void addInvoiceExtras(Document document) throws DocumentException
         rate1.setBorderWidth(1);
         table2.addCell(rate1);
         total1 = new PdfPCell(new Paragraph("Total",subFont2));
-
-        total1.setBorderWidthBottom(2f);
-
+        table2.addCell(total1);
+        document.add(table2);
 
 
 
         PdfPTable tableNew = new PdfPTable(1);
 
-        PdfPCell a=new PdfPCell(table2);
+        PdfPCell a=new PdfPCell();
         a.setFixedHeight(300f);
         tableNew.addCell(a);
         document.add(tableNew);
