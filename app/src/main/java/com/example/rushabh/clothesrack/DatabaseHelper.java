@@ -1062,6 +1062,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    public String getContactDetails(String cid){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String selectQuery = "Select "+Col_Contacts_Details+ " From "+ Table_Contacts+" Where "+Col_Contacts_ID+"='"+cid+"'";
+        Cursor cursor= db.rawQuery(selectQuery,null);
+        String cdetails="";
+        if(cursor.moveToFirst()){
+            cdetails=cursor.getString(0);
+        }
+        return cdetails;
+
+    }
+
+
+    public void updateContact(String cid, String cname, String cno, String cdetails,String td){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(Col_Contacts_Name,cname);
+        contentValues.put(Col_Contacts_No,cno);
+        contentValues.put(Col_Contacts_Details,cdetails);
+        contentValues.put(Col_Contacts_TD,td);
+        db.update(Table_Contacts,contentValues,Col_Contacts_ID+"="+cid,null);
+        db.close();
+
+
+    }
+
 
 
 

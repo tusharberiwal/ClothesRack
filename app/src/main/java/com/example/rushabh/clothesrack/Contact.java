@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -59,18 +59,22 @@ public class Contact extends Fragment implements View.OnClickListener{
 
 
     public void openEditWindow(View editView,int position) {
-       LinearLayout editViewData = ((LinearLayout) editView);
+       RelativeLayout editViewData = ((RelativeLayout) editView);
+        ContactModel contactModel= new ContactModel();
 
-        Intent intent = new Intent(getContext(), addStock.class);
+
+        Intent intent = new Intent(getContext(), addcontact.class);
         Bundle b = new Bundle();
-        b.putString("itemid", ((TextView) editView.findViewById(R.id.ItemIdView)).getText().toString());
-        b.putString("size", ((TextView) editView.findViewById(R.id.SizeView)).getText().toString());
-        b.putString("qty", ((TextView) editView.findViewById(R.id.QtyView)).getText().toString());
+        b.putString("cName", ((TextView) editViewData.findViewById(R.id.cName)).getText().toString());
+        b.putString("cNumber", ((TextView) editViewData.findViewById(R.id.cNumber)).getText().toString());
+        b.putString("cID", ((TextView) editViewData.findViewById(R.id.cID)).getText().toString());
+        b.putInt("pos",position);
         intent.putExtras(b);
         startActivityForResult(intent, 1);
     }
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         FragmentTransaction ft = getFragmentManager().beginTransaction();
        ft.replace(R.id.content_frame,new Contact()).commit();
   //     ft.detach(this).attach(this).commit();
@@ -116,12 +120,19 @@ public class Contact extends Fragment implements View.OnClickListener{
 
     }
 
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId())
         {
             case R.id.addnewContact:
-            {}
+            {
+                Intent intent = new Intent(getContext(), addcontact.class);
+                startActivityForResult(intent, 3);
+
+            }
         }
     }
 }

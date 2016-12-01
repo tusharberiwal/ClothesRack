@@ -26,6 +26,8 @@ public class addcontact extends AppCompatActivity {
     EditText addContactDetail;
     EditText addContactNo;
     DatabaseHelper db;
+    int pos=-1;
+    String cID;
 
     Purchase purchase = new Purchase();
     /**
@@ -48,10 +50,30 @@ public class addcontact extends AppCompatActivity {
         //  finalClothesrackDB = clothesrackDB;
         db = new DatabaseHelper(this);
 
+        populateContact();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    public void populateContact(){
+
+
+            Bundle bundle = getIntent().getExtras();
+            if(bundle!=null) {
+                pos = bundle.getInt("pos");
+                if (pos !=-1) {
+                    addContactName.setText(bundle.getString("cName"));
+                    addContactNo.setText(bundle.getString("cNumber"));
+                    cID= bundle.getString("cID");
+                    addContactDetail.setText(db.getContactDetails(cID));
+
+
+                }
+            }
+
+
     }
 
     public void SaveAddContact(View view) {
@@ -61,13 +83,23 @@ public class addcontact extends AppCompatActivity {
 
             // finalClothesrackDB.execSQL("INSERT INTO Contacts (CName, Details, ContactsTD)Values('" + addContactName.getText() + "' , '" + addContactDetail.getText() + "' , '" + date + "');");
             // Toast.makeText(addcontact.this, addContactName.getText() + ":" + addContactDetail.getText(), Toast.LENGTH_SHORT).show();
-            Integer i = 0;
-            String temp = addContactNo.getText().toString();
+           if(pos!=-1){
+               db.updateContact(cID,addContactName.getText().toString(),addContactNo.getText().toString(),addContactDetail.getText().toString(),date);
+               Intent in = new Intent(getApplicationContext(), Contact.class);
+               setResult(RESULT_OK, in);
+               finish();
 
-            db.insertContacts(addContactName.getText().toString(), addContactNo.getText().toString(), addContactDetail.getText().toString(), date);
-            Intent in = new Intent(getApplicationContext(), Purchase.class);
-            setResult(RESULT_OK, in);
-            finish();
+           }
+
+            else {
+               String temp = addContactNo.getText().toString();
+
+               db.insertContacts(addContactName.getText().toString(), addContactNo.getText().toString(), addContactDetail.getText().toString(), date);
+
+               Intent in = new Intent(getApplicationContext(), Purchase.class);
+               setResult(RESULT_OK, in);
+               finish();
+           }
         }
     }
 
