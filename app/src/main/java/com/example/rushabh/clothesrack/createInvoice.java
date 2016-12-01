@@ -2,12 +2,14 @@ package com.example.rushabh.clothesrack;
 
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.support.v4.app.Fragment;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.itextpdf.text.BaseColor;
@@ -15,6 +17,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -24,6 +27,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -146,7 +150,7 @@ private void addInvoiceExtras(Document document) throws DocumentException
     displayString.setBorderWidth(1);
     signatureTable.addCell(displayString);
 
-    displayString = new PdfPCell(new Paragraph("RUSHABH PAREKH AND COMPANY\n\n\n\n                 Authorized Signatory",subFont4));
+    displayString = new PdfPCell(new Paragraph("RUSHABH PAREKH AND TUSHAR BERIWALp\n\n\n\n                 Authorized Signatory",subFont4));
     displayString.setFixedHeight(60f);
     displayString.setBorderWidth(1);
     signatureTable.addCell(displayString);
@@ -199,7 +203,6 @@ private void addInvoiceExtras(Document document) throws DocumentException
 
         prod1 = new PdfPCell(new Paragraph("Description",subFont2));
         prod1.setBorderWidth(1);
-
         table2.addCell(prod1);
         qty1 = new PdfPCell(new Paragraph("Quantity",subFont2));
         qty1.setBorderWidth(1);
@@ -208,18 +211,14 @@ private void addInvoiceExtras(Document document) throws DocumentException
         rate1.setBorderWidth(1);
         table2.addCell(rate1);
         total1 = new PdfPCell(new Paragraph("Total",subFont2));
-
-    //    total1.setBorderWidthBottom(2f);
         table2.addCell(total1);
-
-
         document.add(table2);
 
 
 
         PdfPTable tableNew = new PdfPTable(1);
 
-        PdfPCell a=new PdfPCell(table2);
+        PdfPCell a=new PdfPCell();
         a.setFixedHeight(300f);
         tableNew.addCell(a);
         document.add(tableNew);
