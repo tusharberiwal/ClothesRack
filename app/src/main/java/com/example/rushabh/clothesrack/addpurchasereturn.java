@@ -46,7 +46,9 @@ public class addpurchasereturn extends Activity {
         if(bundle!=null) {
 
             if(bundle.getString("isScan").equals("y"))
-            {   openscanner();
+            {
+                getIntent().removeExtra("isScan");
+                openscanner();
 
             }
 

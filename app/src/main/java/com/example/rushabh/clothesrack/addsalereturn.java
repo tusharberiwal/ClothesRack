@@ -26,6 +26,7 @@ public class addsalereturn extends Activity {
     EditText costSale;
     String srno;
     int pos= -1;
+    int camflag= 0;
     DatabaseHelper db;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,8 +46,9 @@ public class addsalereturn extends Activity {
         Bundle bundle = getIntent().getExtras();
         if(bundle!=null) {
             if(bundle.getString("isScan").equals("y"))
-            {   openscanner();
-
+            {
+                getIntent().removeExtra("isScan");
+                openscanner();
             }
 
             else {
@@ -77,16 +79,19 @@ public class addsalereturn extends Activity {
         //retrieve scan result
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
 
-        if (scanningResult != null) {
+        if (scanningResult != null && resultCode==RESULT_OK) {
+            Toast.makeText(this, "In Scanning result", Toast.LENGTH_SHORT).show();
+
             //View view=;
             //we have a result
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
 
             // display it on screen
-            Toast toast = Toast.makeText(getApplicationContext(),scanContent,Toast.LENGTH_LONG);
-            toast.show();
-            itemIDSale.setText(scanContent);
+           //  Toast toast = Toast.makeText(getApplicationContext(),scanContent,Toast.LENGTH_LONG);
+           // toast.show();
+
+           itemIDSale.setText(scanContent);
             search(null);
 
         }else{
@@ -94,6 +99,9 @@ public class addsalereturn extends Activity {
             toast.show();
         }
     }
+
+
+
     public void AddSaleToList(View view){
 
         if(!isAnyFieldEmpty(itemIDSale,sizeSale,qtySale,costSale)) {
