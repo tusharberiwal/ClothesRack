@@ -30,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -73,6 +74,20 @@ public class createInvoice extends Fragment implements View.OnClickListener {
 
     }
 
+    public ArrayList<InvoicePrintModel> getDataForInvoice()
+    {
+        ArrayList<InvoicePrintModel>  data=new ArrayList<InvoicePrintModel>();
+        for(int i=0;i<10;i++)
+        {
+            InvoicePrintModel singleData = new InvoicePrintModel();
+            singleData.Description="Brand"+i+" Product"+i+" Size"+i;
+            singleData.Rate=i;
+            singleData.Quantity=i;
+            data.add(singleData);
+        }
+        return data;
+    }
+
     public void createInvoicePDF() throws FileNotFoundException, DocumentException
     {
         Toast.makeText(getContext(),"start invoice",Toast.LENGTH_SHORT).show();
@@ -100,7 +115,8 @@ public class createInvoice extends Fragment implements View.OnClickListener {
         document.addCreationDate();
 
         addTitlePage(document);
-        addCustomerDetails( document);
+        ArrayList<InvoicePrintModel> data= getDataForInvoice();
+        addCustomerDetails(document,data);
         addInvoiceExtras(document);
 
         document.close();
@@ -159,7 +175,7 @@ private void addInvoiceExtras(Document document) throws DocumentException
 
 }
 
-    private void addCustomerDetails(Document document) throws DocumentException
+    private void addCustomerDetails(Document document, ArrayList<InvoicePrintModel> data) throws DocumentException
     {
         Paragraph preface = new Paragraph();
 
@@ -214,12 +230,43 @@ private void addInvoiceExtras(Document document) throws DocumentException
         table2.addCell(total1);
         document.add(table2);
 
+        PdfPTable datatTable = new PdfPTable(5);
+        float[] datatableColumnWidths = new float[] {10f, 30f, 10f, 10f,10f};
+        datatTable.setWidths(datatableColumnWidths);
+        PdfPCell dataDescrp,dataSr;
+        PdfPCell dataQuantity,dataRate,dataTotal;
+        for(int i=0;i<data.size();i++) {
 
+
+
+            dataSr = new PdfPCell(new Paragraph(""+i,subFont2));
+            dataSr.setBorderWidth(1);
+            datatTable.addCell(dataSr);
+
+            dataDescrp = new PdfPCell(new Paragraph(data.get(i).Description,subFont2));
+            dataDescrp.setBorderWidth(1);
+            datatTable.addCell(dataDescrp);
+            //String quanity=(data.get(i).Description).toString();
+            int qty=data.get(i).Quantity;
+            dataQuantity = new PdfPCell(new Paragraph(""+qty,subFont2));
+            dataQuantity.setBorderWidth(1);
+            datatTable.addCell(dataQuantity);
+            long rate=data.get(i).Rate;
+            dataRate = new PdfPCell(new Paragraph(""+rate,subFont2));
+            dataRate.setBorderWidth(1);
+            datatTable.addCell(dataRate);
+            dataTotal = new PdfPCell(new Paragraph(""+(qty*rate),subFont2));
+            datatTable.addCell(dataTotal);
+
+
+        }
+
+        document.add(datatTable);
 
         PdfPTable tableNew = new PdfPTable(1);
 
         PdfPCell a=new PdfPCell();
-        a.setFixedHeight(300f);
+        a.setFixedHeight(30f);
         tableNew.addCell(a);
         document.add(tableNew);
     }
