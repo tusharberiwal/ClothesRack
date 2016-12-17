@@ -49,11 +49,12 @@ public class createInvoice extends Fragment implements View.OnClickListener {
             Font.NORMAL, BaseColor.BLACK);
     private static Font subFont4 = new Font(Font.FontFamily.TIMES_ROMAN, 10,
             Font.BOLD, BaseColor.BLACK);
+    ArrayList<InvoicePrintModel> invoicePrintModelList;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView= inflater.inflate(R.layout.create_invoice, container,false);
-        create_Invoice = (Button)myView.findViewById(R.id.createInvoice);
-        create_Invoice.setOnClickListener(this);
+//        myView= inflater.inflate(R.layout.create_invoice, container,false);
+//        create_Invoice = (Button)myView.findViewById(R.id.createInvoice);
+//        create_Invoice.setOnClickListener(this);
 
         return myView;
     }
@@ -64,7 +65,7 @@ public class createInvoice extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.createInvoice: {
                 try {
-                    createInvoicePDF();
+                    //createInvoicePDF();
                 } catch (Exception e) {
                     Log.i("", e.getMessage());
                 }
@@ -86,6 +87,18 @@ public class createInvoice extends Fragment implements View.OnClickListener {
             data.add(singleData);
         }
         return data;
+    }
+
+    public void printinvoice(ArrayList<InvoicePrintModel> invoiceData) {
+        invoicePrintModelList = new ArrayList<InvoicePrintModel>(invoiceData);
+        if (invoicePrintModelList != null && invoicePrintModelList.size() > 0) {
+            try {
+                createInvoicePDF();
+            } catch (Exception e) {
+                Log.v("", e.getMessage().toString());
+            }
+
+        }
     }
 
     public void createInvoicePDF() throws FileNotFoundException, DocumentException
@@ -115,8 +128,8 @@ public class createInvoice extends Fragment implements View.OnClickListener {
         document.addCreationDate();
 
         addTitlePage(document);
-        ArrayList<InvoicePrintModel> data= getDataForInvoice();
-        addCustomerDetails(document,data);
+        //ArrayList<InvoicePrintModel> data= getDataForInvoice();
+        addCustomerDetails(document,invoicePrintModelList);
         addInvoiceExtras(document);
 
         document.close();
