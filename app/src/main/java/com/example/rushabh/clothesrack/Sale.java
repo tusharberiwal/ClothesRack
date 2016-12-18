@@ -1,6 +1,8 @@
 package com.example.rushabh.clothesrack;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -221,18 +223,57 @@ public class Sale extends Fragment implements View.OnClickListener {
         TextView tempQty ;
         TextView tempMRP ;
         TextView tempItemID;
+        final ArrayList<InvoicePrintModel> invoiceData= new ArrayList<InvoicePrintModel>();
         if(count>0) {
             for (int i = 0; i < count; i++) {
+                InvoicePrintModel invoicePrintModel = new InvoicePrintModel();
                 v = listView.getChildAt(i);
                 tempProduct = (TextView) v.findViewById(R.id.products);
                 tempBrand = (TextView) v.findViewById(R.id.brands);
                 tempSize = (TextView) v.findViewById(R.id.sizes);
+                invoicePrintModel.Description=tempProduct.getText().toString() + tempBrand.getText().toString()+tempSize.getText().toString();
                 tempQty = (TextView) v.findViewById(R.id.qtys);
+                invoicePrintModel.Quantity=(Integer.parseInt(tempQty.getText().toString()));
                 tempMRP = (TextView) v.findViewById(R.id.mrps);
+                invoicePrintModel.Rate=(Integer.parseInt(tempMRP.getText().toString()));
                 tempItemID= (TextView)v.findViewById(R.id.itemids) ;
 
                 String tempProductID= db.getProductID(tempProduct.getText().toString());
                 String tempBrandID= db.getBrandID(tempBrand.getText().toString());;
+
+                invoiceData.add(invoicePrintModel);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+
+
+                builder.setTitle("Confirm");
+                builder.setMessage("Do you want to print the invoice?");
+
+                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        //Toast.makeText(getContext(),"You clicked yes button",Toast.LENGTH_LONG).show();
+                        createInvoice CI = new createInvoice();
+                        CI.printinvoice(invoiceData);
+                        //dialog.dismiss();
+                    }
+                });
+
+                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        // Do nothing
+                        //dialog.dismiss();
+
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
 
 
                 int stockqty= db.getStockQty(tempItemID.getText().toString());
